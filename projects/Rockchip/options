@@ -5,12 +5,10 @@
   # Bootloader to use (syslinux / u-boot / bcm2835-bootloader)
     BOOTLOADER="u-boot"
 
-  # Kernel extra targets to build
-    KERNEL_UBOOT_EXTRA_TARGET=""
-
   # Kernel to use. values can be:
   # default:  default mainline kernel
-    LINUX="${LINUX:-rockchip-4.4}"
+    #LINUX="${LINUX:-rockchip-4.4}"
+    LINUX="${LINUX:-odroid-go-a-4.4}"
 
 ################################################################################
 # setup build defaults
@@ -33,7 +31,7 @@
     OPENGL="no"
 
   # OpenGL-ES implementation to use (no / bcm2835-driver / gpu-viv-bin-mx6q)
-    OPENGLES="libmali"
+    OPENGLES="mali-bifrost"
 
   # include uvesafb support (yes / no)
     UVESAFB_SUPPORT="no"
@@ -61,8 +59,14 @@
   # additional Firmware to use (dvb-firmware, misc-firmware, wlan-firmware)
   # Space separated list is supported,
   # e.g. FIRMWARE="dvb-firmware misc-firmware wlan-firmware"
-    FIRMWARE="misc-firmware wlan-firmware dvb-firmware rockchip-firmware"
+    FIRMWARE="" #misc-firmware wlan-firmware rockchip-firmware dvb-firmware"
 
+# additional drivers to install:
+# for a list of additional drivers see packages/linux-drivers
+# Space separated list is supported,
+# e.g. ADDITIONAL_DRIVERS="DRIVER1 DRIVER2"
+  ADDITIONAL_DRIVERS="" #"RTL8192CU RTL8192DU RTL8192EU RTL8188EU RTL8812AU RTL8821CU"
+  
   # additional packages to install
     ADDITIONAL_PACKAGES="dtc"
 
@@ -81,7 +85,7 @@
   # driver addons to install:
   # for a list of additinoal drivers see packages/linux-driver-addons
   # Space separated list is supported,
-    DRIVER_ADDONS="dvb-latest"
+    DRIVER_ADDONS="" #dvb-latest"
 
   # debug tty path
-    DEBUG_TTY="/dev/ttyS2"
+    DEBUG_TTY="/dev/ttyFIQ0"

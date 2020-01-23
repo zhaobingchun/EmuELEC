@@ -4,7 +4,7 @@
 PKG_RKBIN="$(get_build_dir rkbin)"
 PKG_SOC=$UBOOT_SYSTEM
 
-if [ "$DEVICE" = "RK3328" -o "$DEVICE" = "RK3399" ]; then
+if [ "$DEVICE" = "RK3326" -o "$DEVICE" = "RK3328" -o "$DEVICE" = "RK3399" ]; then
   PKG_SOC="${DEVICE/RK/rk}"
 fi
 
@@ -17,6 +17,13 @@ case "$PKG_SOC" in
     PKG_DATAFILE="$PKG_RKBIN/rk32/rk3288_ddr_400MHz_v1.06.bin"
     PKG_LOADER="$PKG_RKBIN/rk32/rk3288_miniloader_v2.36.bin"
     PKG_LOAD_ADDR="0x0"
+    ;;
+  rk3326)
+    PKG_DATAFILE="$PKG_RKBIN/bin/rk33/rk3326_ddr_333MHz_v1.14.bin"
+    PKG_LOADER="$PKG_RKBIN/bin/rk33/rk3326_miniloader_v1.20.bin"
+    PKG_BL31="$PKG_RKBIN/bin/rk33/rk3326_bl31_v1.18.elf"
+    PKG_BL32="$PKG_RKBIN/bin/rk33/rk3326_bl32_v1.13.bin"
+    PKG_LOAD_ADDR="0x00200000"
     ;;
   rk3328)
     PKG_DATAFILE="$PKG_RKBIN/rk33/rk3328_ddr_786MHz_v1.13.bin"
@@ -36,11 +43,14 @@ case "$PKG_SOC" in
     ;;
 esac
 
+# not sure why mkimage will not work with RK3326 :/ 
+PKG_SOC="px30"
 if [ -n "$PKG_DATAFILE" -a -n "$PKG_LOADER" ]; then
-  tools/mkimage -n $PKG_SOC -T rksd -d "$PKG_DATAFILE" idbloader.img
+    tools/mkimage -n $PKG_SOC -T rksd -d "$PKG_DATAFILE" idbloader.img
   cat "$PKG_LOADER" >> idbloader.img
   cp -av idbloader.img $INSTALL/usr/share/bootloader
 fi
+PKG_SOC="rk3326"
 
 if [ -n "$PKG_LOAD_ADDR" ]; then
   $PKG_RKBIN/tools/loaderimage --pack --uboot u-boot-dtb.bin uboot.img $PKG_LOAD_ADDR
@@ -49,6 +59,9 @@ fi
 
 if [ -n "$PKG_BL31" ]; then
   cat >trust.ini <<EOF
+[VERSION]
+MAJOR=1
+MINOR=0
 [BL30_OPTION]
 SEC=0
 [BL31_OPTION]
@@ -56,12 +69,14 @@ SEC=1
 PATH=$PKG_BL31
 ADDR=0x00010000
 [BL32_OPTION]
-SEC=0
+SEC=1
+PATH=$PKG_BL32
+ADDR=0x08400000
 [BL33_OPTION]
 SEC=0
 [OUTPUT]
 PATH=trust.img
 EOF
-  $PKG_RKBIN/tools/trust_merger --verbose trust.ini
+  $PKG_RKBIN/tools/trust_merger --rsa 3 --verbose trust.ini
   cp -av trust.img $INSTALL/usr/share/bootloader
 fi
