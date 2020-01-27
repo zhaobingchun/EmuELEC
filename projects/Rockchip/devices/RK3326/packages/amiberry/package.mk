@@ -2,20 +2,21 @@
 # Copyright (C) 2018-present Frank Hartung (supervisedthinking (@) gmail.com)
 
 PKG_NAME="amiberry"
-PKG_VERSION="066d192aded5afa2cae55549d34282ea4cbebbe5"
+PKG_VERSION="7ff924b89d28b8862a790f252de3c9002e8051a3"
 PKG_ARCH="arm"
 PKG_LICENSE="GPLv3"
 PKG_SITE="https://github.com/midwan/amiberry"
 PKG_URL="https://github.com/midwan/amiberry.git"
-PKG_DEPENDS_TARGET="toolchain linux glibc bzip2 zlib SDL2-git SDL2_image SDL2_ttf capsimg freetype libxml2 flac libogg mpg123-compat libpng libmpeg2 libgo2"
+PKG_DEPENDS_TARGET="toolchain linux glibc bzip2 zlib SDL2-git SDL2_image SDL2_ttf capsimg freetype libxml2 flac libogg mpg123-compat libpng libmpeg2"
 PKG_LONGDESC="Amiberry is an optimized Amiga emulator for ARM-based boards."
 GET_HANDLER_SUPPORT="git"
 PKG_TOOLCHAIN="make"
-PKG_GIT_CLONE_BRANCH="goadvance"
+PKG_GIT_CLONE_BRANCH="master"
 
-PKG_MAKE_OPTS_TARGET="all"
-
-
+if [ $DEVICE == "RK3326" ]; then
+PKG_DEPENDS_TARGET=" $PKG_DEPENDS_TARGET libgo2"
+AMIBERRY_PLATFORM="RK3326"
+fi
 
 pre_configure_target() {
   cd ${PKG_BUILD}
@@ -28,12 +29,12 @@ pre_configure_target() {
     Amlogic-ng)
         AMIBERRY_PLATFORM="AMLG12B"
       ;;
-    Rockchip)
-        AMIBERRY_PLATFORM="RK3326"
-      ;;
   esac
 
-  PKG_MAKE_OPTS_TARGET+=" PLATFORM=${AMIBERRY_PLATFORM} USE_LIBGO2=yes SDL_CONFIG=${SYSROOT_PREFIX}/usr/bin/sdl2-config"
+sed -i "s|AS     = as|AS     \?= as|" Makefile
+#sed -i "s|-Iexternal/libgo2/src|-I$(get_build_dir libgo2)/src|" Makefile
+
+PKG_MAKE_OPTS_TARGET+=" all PLATFORM=${AMIBERRY_PLATFORM} SDL_CONFIG=${SYSROOT_PREFIX}/usr/bin/sdl2-config"
 }
 
 makeinstall_target() {
