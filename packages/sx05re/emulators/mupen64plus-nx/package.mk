@@ -25,6 +25,8 @@ if [ ${PROJECT} = "Amlogic-ng" ]; then
 	PKG_MAKE_OPTS_TARGET+=" platform=AMLG12 GLES=1 FORCE_GLES=1 HAVE_NEON=1 WITH_DYNAREC=arm"
 elif [ "${PROJECT}" = "Amlogic" ]; then
 	PKG_MAKE_OPTS_TARGET+=" platform=AMLGX GLES=1 FORCE_GLES=1 HAVE_NEON=1 WITH_DYNAREC=arm"
+elif [ "${DEVICE}" = "RK3326" ]; then
+	PKG_MAKE_OPTS_TARGET+=" platform=odroidgoa"
 fi
 
 makeinstall_target() {
