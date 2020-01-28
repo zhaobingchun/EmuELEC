@@ -16,6 +16,7 @@ fi
 
 if [ $DEVICE == "RK3326" ]; then
   PKG_PATCH_DIRS="RK3326"
+  PKG_DEPENDS_TARGET="$PKG_DEPENDS_TARGET libdrm mali-bifrost"
 fi
 
 pre_configure_target(){

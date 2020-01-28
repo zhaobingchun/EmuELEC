@@ -8,6 +8,7 @@ PKG_ARCH="arm aarch64"
 PKG_LICENSE="nonfree"
 PKG_SITE="https://github.com/rockchip-linux/libmali"
 PKG_URL="$PKG_SITE/archive/$PKG_VERSION.tar.gz"
+PKG_DEPENDS_TARGET="toolchain libdrm"
 PKG_LONGDESC="The Mali GPU library used in Rockchip Platform for Odroidgo Advance"
 
 post_makeinstall_target() {
