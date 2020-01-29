@@ -59,6 +59,9 @@ make_target() {
     Amlogic*)
      make platform=armv8-neon-hardfloat-cortex-a53
       ;;
+    Rockchip*)
+     make platform=armv8-neon-hardfloat-cortex-a35
+      ;;
     Generic)
       make
       ;;

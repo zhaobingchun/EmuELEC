@@ -16,7 +16,7 @@ PKG_TOOLCHAIN="make"
 PKG_MAKE_OPTS_TARGET="all"
 
 pre_configure_target() {
-sed -i -e "s/cortex-a7/cortex-a53/" $PKG_BUILD/Makefile
+sed -i -e "s/cortex-a7/cortex-a35/" $PKG_BUILD/Makefile
 }
     
 makeinstall_target() {
