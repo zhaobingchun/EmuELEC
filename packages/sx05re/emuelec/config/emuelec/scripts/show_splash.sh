@@ -73,7 +73,8 @@ else
 	SPLASH=${VIDEOSPLASH}
 	set_audio alsa
 	#[ -e /storage/.config/asound.conf ] && mv /storage/.config/asound.conf /storage/.config/asound.confs
-	ffplay -autoexit -fs "$SPLASH" > /dev/null 2>&1
+	# no need for intro video on odroid go advance
+	#ffplay -autoexit -fs "$SPLASH" > /dev/null 2>&1
 	touch "/storage/.config/emuelec/configs/novideo"
 	#[ -e /storage/.config/asound.confs ] && mv /storage/.config/asound.confs /storage/.config/asound.conf
 fi
