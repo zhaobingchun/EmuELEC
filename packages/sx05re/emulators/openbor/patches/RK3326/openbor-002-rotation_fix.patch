@@ -24,7 +24,7 @@
  			SDL_RenderSetLogicalSize(renderer, 0, 0);
  		else
 -			SDL_RenderSetLogicalSize(renderer, stored_videomodes.hRes, stored_videomodes.vRes);
-+			SDL_RenderSetLogicalSize(renderer, stored_videomodes.vRes, stored_videomodes.hRes);
++			SDL_RenderSetLogicalSize(renderer, 320, 480);;
  	}
  }
  
@@ -33,7 +33,7 @@
  	                            mode->width, mode->height);
  	if(!stretch)
 -		SDL_RenderSetLogicalSize(renderer, mode->display_width, mode->display_height);
-+		SDL_RenderSetLogicalSize(renderer, mode->display_height, mode->display_width);
++		SDL_RenderSetLogicalSize(renderer, 320, 480);;
  	return texture ? 1 : 0;
  }
  
