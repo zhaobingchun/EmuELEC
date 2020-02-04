@@ -18,8 +18,8 @@ PKG_NEED_UNPACK="$PROJECT_DIR/$PROJECT/bootloader"
 [ -n "$DEVICE" ] && PKG_NEED_UNPACK+=" $PROJECT_DIR/$PROJECT/devices/$DEVICE/bootloader"
 
 	# This is specific for the Rk3326 on the Odroid-Go Advance
-    PKG_VERSION="8ed2f55c1f77d2458fc2d7bd137700e987a82477"
-    PKG_SHA256="f930f8e297551558af855df7750f8b0cd5f940dde029daf54763d93938daf40f"
+    PKG_VERSION="231c0fa3f704286644a52755daa4e00316670dbb"
+    PKG_SHA256="0126994f06b26521af45376dc0ae0772e0643a3bdc0211cf1250560b16530be1"
     PKG_URL="https://github.com/hardkernel/u-boot/archive/$PKG_VERSION.tar.gz"
     PKG_PATCH_DIRS="rockchip"
     PKG_DEPENDS_TARGET+=" rkbin"

@@ -1,15 +1,6 @@
 --- a/board/rockchip/odroidgo2/odroidgo2.c
 +++ b/board/rockchip/odroidgo2/odroidgo2.c
-@@ -120,7 +120,7 @@
- 	}
- 
- 	/* check kernel and dtb in vfat of sd card */
--	if (!file_exists("mmc", "1", "Image", FS_TYPE_FAT)) {
-+	if (!file_exists("mmc", "1", "KERNEL", FS_TYPE_FAT)) {
- 		odroid_display_status(LOGO_MODE_SYSTEM_ERR,
- 				LOGO_STORAGE_ANYWHERE, "No Kernel Image");
- 		goto err;
-@@ -133,10 +133,10 @@
+@@ -120,10 +120,10 @@
  	}
  
  	/* check launcher in ext4 fs of sd card */
