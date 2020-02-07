@@ -169,6 +169,10 @@ makeinstall_target() {
   echo "user_language = \"0\"" >> $INSTALL/etc/retroarch.cfg
   echo "menu_show_shutdown = \"false\"" >> $INSTALL/etc/retroarch.cfg
   echo "menu_show_reboot = \"false\"" >> $INSTALL/etc/retroarch.cfg
+  echo "input_player1_analog_dpad_mode = \"1\"" >> $INSTALL/etc/retroarch.cfg
+  echo "input_player2_analog_dpad_mode = \"1\"" >> $INSTALL/etc/retroarch.cfg
+  echo "input_player3_analog_dpad_mode = \"1\"" >> $INSTALL/etc/retroarch.cfg
+  echo "input_player4_analog_dpad_mode = \"1\"" >> $INSTALL/etc/retroarch.cfg
  if [ $DEVICE == "RK3326" ]; then
   sed -i -e "s/# video_allow_rotate = true/video_allow_rotate = true/" $INSTALL/etc/retroarch.cfg
   sed -i -e "s/# video_rotation = 0/video_rotation = 1/" $INSTALL/etc/retroarch.cfg
