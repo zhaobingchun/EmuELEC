@@ -8,6 +8,11 @@
 # 19/01/2020 use ffplay for all splash 
 # 06/02/2020 move splash to roms folder and add global splash support
 
+# Odroid Go Advance still does not support splash screens
+if [ -f /odroidgoa ]; then
+	exit 0
+fi
+
 . /etc/profile
 
 PLATFORM="$1"
@@ -88,8 +93,7 @@ else
 	SPLASH=${VIDEOSPLASH}
 	set_audio alsa
 	#[ -e /storage/.config/asound.conf ] && mv /storage/.config/asound.conf /storage/.config/asound.confs
-	# no need for intro video on odroid go advance
-	#ffplay -autoexit -fs "$SPLASH" > /dev/null 2>&1
+	ffplay -autoexit -fs "$SPLASH" > /dev/null 2>&1
 	touch "/storage/.config/emuelec/configs/novideo"
 	#[ -e /storage/.config/asound.confs ] && mv /storage/.config/asound.confs /storage/.config/asound.conf
 fi

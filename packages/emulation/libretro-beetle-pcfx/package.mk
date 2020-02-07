@@ -22,7 +22,14 @@ make_target() {
     cortex-a7)
       make platform=armv7-neon-hardfloat
       ;;
-    cortex-a35|cortex-a9|*cortex-a53|cortex-a17)
+    cortex-a7|cortex-a9)
+      if [ "$TARGET_ARCH" = "aarch64" ]; then
+        make platform=aarch64
+      else
+        make platform=armv7-$TARGET_CPU-neon-hardfloat
+      fi
+      ;;
+    *cortex-a53|cortex-a35|cortex-a17)
       if [ "$TARGET_ARCH" = "aarch64" ]; then
         make platform=aarch64
       else

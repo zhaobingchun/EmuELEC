@@ -14,8 +14,8 @@ PKG_SHORTDESC="VVVVVV License: https://github.com/TerryCavanagh/VVVVVV/blob/mast
 PKG_LONGDESC="VVVVVV is a platform game all about exploring one simple mechanical idea - what if you reversed gravity instead of jumping?"
 PKG_TOOLCHAIN="cmake"
 
-if [ $DEVICE == "RK3326" ]; then
-PKG_PATCH_DIRS="RK3326"
+if [ "$DEVICE" == "OdroidGoAdvance" ]; then
+PKG_PATCH_DIRS="OdroidGoAdvance"
 fi
 
 PKG_CMAKE_OPTS_TARGET=" desktop_version"

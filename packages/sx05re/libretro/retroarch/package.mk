@@ -54,7 +54,7 @@ PKG_CONFIGURE_OPTS_TARGET="--disable-vg \
 			               --disable-opengl_core \
 			               --enable-ffmpeg"
 
-if [ $DEVICE == "RK3326" ]; then
+if [ "$DEVICE" == "OdroidGoAdvance" ]; then
 PKG_DEPENDS_TARGET=" $PKG_DEPENDS_TARGET libdrm"
 PKG_CONFIGURE_OPTS_TARGET=" $PKG_CONFIGURE_OPTS_TARGET --enable-kms --disable-mali_fbdev"
 else
@@ -173,7 +173,7 @@ makeinstall_target() {
   echo "input_player2_analog_dpad_mode = \"1\"" >> $INSTALL/etc/retroarch.cfg
   echo "input_player3_analog_dpad_mode = \"1\"" >> $INSTALL/etc/retroarch.cfg
   echo "input_player4_analog_dpad_mode = \"1\"" >> $INSTALL/etc/retroarch.cfg
- if [ $DEVICE == "RK3326" ]; then
+ if [ "$DEVICE" == "OdroidGoAdvance" ]; then
   sed -i -e "s/# video_allow_rotate = true/video_allow_rotate = true/" $INSTALL/etc/retroarch.cfg
   sed -i -e "s/# video_rotation = 0/video_rotation = 1/" $INSTALL/etc/retroarch.cfg
   sed -i -e "s/# screen_orientation = 0/screen_orientation = 1/" $INSTALL/etc/retroarch.cfg

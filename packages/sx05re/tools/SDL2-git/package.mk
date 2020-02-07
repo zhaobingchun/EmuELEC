@@ -14,8 +14,8 @@ if [ ${PROJECT} = "Amlogic-ng" ] || [ ${PROJECT} = "Amlogic" ]; then
   PKG_PATCH_DIRS="Amlogic"
 fi
 
-if [ $DEVICE == "RK3326" ]; then
-  PKG_PATCH_DIRS="RK3326"
+if [ "$DEVICE" == "OdroidGoAdvance" ]; then
+  PKG_PATCH_DIRS="OdroidGoAdvance"
   PKG_DEPENDS_TARGET="$PKG_DEPENDS_TARGET libdrm mali-bifrost"
 fi
 
@@ -64,7 +64,7 @@ pre_configure_target(){
                          -DVIDEO_OPENGLES=ON \
                          -DVIDEO_VULKAN=OFF \
                          -DPULSEAUDIO=ON"
-if [ $DEVICE == "RK3326" ]; then
+if [ "$DEVICE" == "OdroidGoAdvance" ]; then
 PKG_CMAKE_OPTS_TARGET="$PKG_CMAKE_OPTS_TARGET -DVIDEO_KMSDRM=ON"
 else
 PKG_CMAKE_OPTS_TARGET="$PKG_CMAKE_OPTS_TARGET -DVIDEO_MALI=ON -DVIDEO_KMSDRM=OFF"

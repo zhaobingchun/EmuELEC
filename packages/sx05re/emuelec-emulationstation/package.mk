@@ -21,7 +21,7 @@ PKG_DEPENDS_TARGET="$PKG_DEPENDS_TARGET es-theme-EmuELEC-carbon"
 
 PKG_CMAKE_OPTS_TARGET=" -DENABLE_EMUELEC=1 -DDISABLE_KODI=1 -DENABLE_FILEMANAGER=1"
 
-if [ $DEVICE == "RK3326" ]; then
+if [ "$DEVICE" == "OdroidGoAdvance" ]; then
 sed -i "s|ExecStart=.*|ExecStart=/usr/bin/emulationstation --log-path /storage/.config/emuelec/logs --screenrotate 3 --resolution 480 320|" $PKG_DIR/system.d/emustation.service
 fi
 
@@ -71,7 +71,7 @@ post_install() {
 	enable_service emustation.service
 	mkdir -p $INSTALL/usr/share
 	ln -sf /storage/.config/emuelec/configs/locale $INSTALL/usr/share/locale
-	if [ $DEVICE != "RK3326" ]; then
+	if [ $DEVICE != "OdroidGoAdvance" ]; then
 	sed -i "s|ExecStart=.*|ExecStart=/usr/bin/emulationstation --log-path /storage/.config/emuelec/logs|" $PKG_DIR/system.d/emustation.service
 	fi
 }
