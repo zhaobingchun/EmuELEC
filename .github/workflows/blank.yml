@@ -33,4 +33,4 @@ jobs:
     # Runs a set of commands using the runners shell
     - name: build zip
       run: |
-        ./emuelec-addon.sh.
+        sh emuelec-addon.sh.
